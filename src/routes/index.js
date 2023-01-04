@@ -1,22 +1,23 @@
-//Layouts
+import routesConfig from '~/config/routes';
+// Layouts
 import { HeaderOnly } from '~/components/Layout';
 
-//Pages
+// Pages
 import Home from '~/pages/Home';
 import Following from '~/pages/Following';
 import Profile from '~/pages/Profile';
 import Upload from '~/pages/Upload';
 import Search from '~/pages/Search';
 
-//Public Routes
-const puclicRoutes = [
-    { path: '/', component: Home },
-    { path: '/following', component: Following },
-    { path: '/@:nickname', component: Profile },
-    { path: '/upload', component: Upload, layout: HeaderOnly },
-    { path: '/search', component: Search, layout: null },
+// Public routes
+const publicRoutes = [
+    { path: routesConfig.home, component: Home },
+    { path: routesConfig.following, component: Following },
+    { path: routesConfig.profile, component: Profile },
+    { path: routesConfig.upload, component: Upload, layout: HeaderOnly },
+    { path: routesConfig.search, component: Search, layout: null },
 ];
 
 const privateRoutes = [];
 
-export { puclicRoutes, privateRoutes };
+export { publicRoutes, privateRoutes };

@@ -2,24 +2,23 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
+    faCoins,
     faEarthAsia,
     faEllipsisVertical,
-    faFileVideo,
     faGear,
     faKeyboard,
-    faPlus,
-    faRightFromBracket,
+    faSignOut,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
 
 import Button from '~/components/Button';
-import Menu from '~/components/Popper/Menu';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
-import { faTiktok } from '@fortawesome/free-brands-svg-icons';
-import { InboxIcon, MessagesIcon } from '~/components/Icons';
+import Menu from '~/components/Popper/Menu';
+import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
 
@@ -56,80 +55,76 @@ const MENU_ITEMS = [
     },
 ];
 
-const userMenu = [
-    {
-        icon: <FontAwesomeIcon icon={faUser} />,
-        title: 'View Profile',
-        to: '/@hoa',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faTiktok} />,
-        title: 'Get Coins',
-        to: '/feedback',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faFileVideo} />,
-        title: 'LIVE Studio',
-        to: '/livesudtio',
-    },
-    {
-        icon: <FontAwesomeIcon icon={faGear} />,
-        title: 'Settings',
-        to: '/settings',
-    },
-    ...MENU_ITEMS,
-    {
-        icon: <FontAwesomeIcon icon={faRightFromBracket} />,
-        title: 'Log out',
-        to: '/logout',
-        separate: true,
-    },
-];
-
 function Header() {
     const currentUser = true;
 
-    //Handle logic
+    // Handle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
             case 'language':
-                //Handle change language
+                // Handle change language
                 break;
             default:
         }
     };
 
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+            to: '/@hoaa',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get coins',
+            to: '/coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: '/logout',
+            separate: true,
+        },
+    ];
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                {/*Logo*/}
-                <div className={cx('logo')}>
-                    <img src={images.logo} alt="TikTok" />
-                </div>
+                <Link to={'/'} className={cx('logo')}>
+                    <img src={images.logo} alt="Tiktok" />
+                </Link>
 
-                {/*Search*/}
                 <Search />
 
                 <div className={cx('actions')}>
-                    <Button text leftIcon={<FontAwesomeIcon icon={faPlus} />}>
-                        Upload
-                    </Button>
                     {currentUser ? (
                         <>
-                            <Tippy delay={[0, 200]} content="Messages" placement="bottom">
+                            <Tippy delay={[0, 50]} content="Upload video" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <MessagesIcon />
+                                    <UploadIcon />
                                 </button>
                             </Tippy>
-
-                            <Tippy delay={[0, 200]} content="Inbox" placement="bottom">
+                            <Tippy delay={[0, 50]} content="Message" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <InboxIcon />
+                                    <span className={cx('badge')}>12</span>
                                 </button>
                             </Tippy>
                         </>
                     ) : (
                         <>
+                            <Button text>Upload</Button>
                             <Button primary>Log in</Button>
                         </>
                     )}
@@ -138,9 +133,8 @@ function Header() {
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
-                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/9c1763d086163fc41c05a6d731057f7f~c5_100x100.jpeg?x-expires=1672923600&x-signature=2980i0wuYLZzvaJJ90XrtkddFHU%3D"
-                                alt="NguyenVanA"
-                                fallBack="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tiktok-obj/7027710715393736706.jpeg?x-expires=1672812000&x-signature=fhi38KcegKpeWeQhNFflUUxhEAs%3D"
+                                src="https://files.fullstack.edu.vn/f8-prod/user_avatars/1/623d4b2d95cec.png"
+                                alt="Nguyen Van A"
                             />
                         ) : (
                             <button className={cx('more-btn')}>
